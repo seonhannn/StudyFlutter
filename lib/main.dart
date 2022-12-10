@@ -12,24 +12,31 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("앱임"),
+          title: Text("과제2"),
         ),
         body: Container(
-          child: Text("안녕"),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(Icons.phone),
-                Icon(Icons.message),
-                Icon(Icons.contact_page),
-              ],
-            ),
+          height: 150,
+          padding: EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Image.asset("assets/apples.jpg")
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("사과 팝니다."),
+                  Text("수원역 직거래"),
+                  Text("5000원"),
+                ],
+              )
+            ],
           ),
-        ),
+        )
       ),
     );
   }
