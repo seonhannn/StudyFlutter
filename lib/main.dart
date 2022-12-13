@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:contacts_service/contacts_service.dart';
 
 void main() {
   runApp(
@@ -9,10 +10,10 @@ void main() {
   );
 }
 
-List<String> people = ["p1", "p2", "p3"];
-var likeNum = [0, 0, 0];
+var people = [];
+var likeNum = [0];
 var inputName = '';
-var peopleNum = 3;
+var peopleNum = 1;
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,6 +28,12 @@ class _MyAppState extends State<MyApp> {
     var status = await Permission.contacts.status;
     if (status.isGranted) {
       print('허락됨');
+      var contacts = await ContactsService.getContacts();
+      print(contacts);
+      setState(() {
+        people = contacts;
+        likeNum.add(0);
+      });
     } else if (status.isDenied) {
       print('거절됨');
       Permission.contacts.request();
@@ -124,7 +131,7 @@ class _PeopleListState extends State<PeopleList> {
                       SizedBox(
                         width: 40,
                       ),
-                      Text(people[i])
+                      Text(people[i].displayName)
                     ],
                   ),
                   trailing: TextButton(
