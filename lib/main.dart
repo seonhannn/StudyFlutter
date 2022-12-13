@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(
@@ -22,6 +23,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+  Future getPermission() async {
+    var status = await Permission.contacts.status;
+    if (status.isGranted) {
+      print('허락됨');
+    } else if (status.isDenied) {
+      print('거절됨');
+      Permission.contacts.request();
+      openAppSettings();
+    }
+  }
+
   TextEditingController inputController = TextEditingController();
 
   addPeople(name) {
@@ -35,6 +47,11 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         title: Text(people.length.toString()),
+        actions: [
+          IconButton(
+            onPressed: (){getPermission();},
+            icon: Icon(Icons.contacts))
+        ],
       ),
       body: Container(
         height: 600,
