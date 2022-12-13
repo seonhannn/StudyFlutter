@@ -8,9 +8,10 @@ void main() {
   );
 }
 
-var people = ["p1", "p2", "p3"];
+List<String> people = ["p1", "p2", "p3"];
 var likeNum = [0, 0, 0];
-var inputName;
+var inputName = '';
+var peopleNum = 3;
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         title: Text(people.length.toString()),
       ),
       body: Container(
-        height: 500,
+        height: 600,
         child: PeopleList(),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -47,14 +48,9 @@ class _MyAppState extends State<MyApp> {
                 context: context,
                 builder: (BuildContext context){
                   return AlertDialog(
-                    title: Text("message"),
+                    title: Text("add people"),
                     content: TextField(
                       controller: inputController,
-                      onChanged: (text){
-                        setState(() {
-                          inputName = text;
-                        });
-                      },
                       decoration: InputDecoration(
                         hintText: "이름을 입력하세요."
                       ),
@@ -65,16 +61,18 @@ class _MyAppState extends State<MyApp> {
                             setState(() {
                               inputName = inputController.text;
                               addPeople(inputName);
+                              peopleNum++;
+                              likeNum.add(0);
+                              Navigator.of(context).pop();
                             });
-                            Navigator.of(context).pop();
                           },
-                          child: Text("Cancel")
+                          child: Text("Add")
                       ),
                       TextButton(
                           onPressed: (){
                             Navigator.of(context).pop();
                           },
-                          child: Text("Ok")
+                          child: Text("Cancel")
                       )
                     ],
                   );
@@ -98,6 +96,7 @@ class _PeopleListState extends State<PeopleList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder (
+        itemCount: peopleNum,
         itemBuilder: (c, i){
           return (
               ListTile(
