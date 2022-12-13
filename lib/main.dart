@@ -101,7 +101,15 @@ class _PeopleListState extends State<PeopleList> {
           return (
               ListTile(
                   leading: Text(likeNum[i].toString()),
-                  title: Text(people[i]),
+                  title: Row(
+                    children: [
+                      Icon(Icons.people),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      Text(people[i])
+                    ],
+                  ),
                   trailing: TextButton(
                     child: Text("좋아요"),
                     onPressed: (){
