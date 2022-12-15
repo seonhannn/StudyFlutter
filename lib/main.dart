@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
                     content: TextField(
                       controller: inputController,
                       decoration: InputDecoration(
-                        hintText: "이름을 입력하세요."
+                        hintText: "enter name"
                       ),
                     ),
                     actions: [
@@ -135,7 +135,7 @@ class _PeopleListState extends State<PeopleList> {
                     ],
                   ),
                   trailing: TextButton(
-                    child: Text("좋아요"),
+                    child: Text("like"),
                     onPressed: (){
                       setState(() {
                         likeNum[i]++;
